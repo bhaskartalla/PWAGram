@@ -17,12 +17,12 @@ if ('serviceWorker' in navigator) {
     });
 }
 
-window.addEventListener('beforeinstallprompt', function(event) {
-  console.log('beforeinstallprompt fired');
-  event.preventDefault();
-  deferredPrompt = event;
-  return false;
-});
+// window.addEventListener('beforeinstallprompt', function(event) {
+//   console.log('beforeinstallprompt fired');
+//   event.preventDefault();
+//   deferredPrompt = event;
+//   return false;
+// });
 
 function displayConfirmNotification() {
   if ('serviceWorker' in navigator) {
@@ -110,14 +110,4 @@ if ('Notification' in window && 'serviceWorker' in navigator) {
     enableNotificationsButtons[i].style.display = 'inline-block';
     enableNotificationsButtons[i].addEventListener('click', askForNotificationPermission);
   }
-}
-
-function urlBase64ToUint8Array(base64String) {
-  const padding = '='.repeat((4 - base64String.length % 4) % 4);
-  const base64 = (base64String + padding)
-    .replace(/\-/g, '+')
-    .replace(/_/g, '/')
-  ;
-  const rawData = window.atob(base64);
-  return Uint8Array.from([...rawData].map((char) => char.charCodeAt(0)));
 }
