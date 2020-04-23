@@ -9,6 +9,10 @@ var os = require("os");
 var Busboy = require("busboy");
 var path = require('path');
 
+// // Create and Deploy Your First Cloud Functions
+// // https://firebase.google.com/docs/functions/write-firebase-functions
+//
+
 var serviceAccount = require("./pwagram-fb-key.json");
 
 var gcconfig = {
@@ -71,12 +75,11 @@ exports.storePostData = functions.https.onRequest(function(request, response) {
               .database()
               .ref("posts")
               .push({
-                id: fields.id,
                 title: fields.title,
                 location: fields.location,
-                rawLocation : {
-                  lat : fields.rawLocationLat,
-                  lng : fields.rawLocationLng
+                rawLocation: {
+                  lat: fields.rawLocationLat,
+                  lng: fields.rawLocationLng
                 },
                 image:
                   "https://firebasestorage.googleapis.com/v0/b/" +
@@ -89,8 +92,8 @@ exports.storePostData = functions.https.onRequest(function(request, response) {
               .then(function() {
                 webpush.setVapidDetails(
                   "mailto:business@academind.com",
-                  "BLQ_Dxie_YZ9c1Eimqt8ZNWCrmCERtpC8qWlGpHRc5ivrvzE-m6msY_Q9VfDsbm1oG3WHpD7DSCtMatsjBMrxz4",
-                  "KBMt40AyQwZtw9nIIJHXXx-1d4pa8HU6iERtlOtZJPw"
+                  "BKapuZ3XLgt9UZhuEkodCrtnfBo9Smo-w1YXCIH8YidjHOFAU6XHpEnXefbuYslZY9vtlEnOAmU7Mc-kWh4gfmE",
+                  "AyVHwGh16Kfxrh5AU69E81nVWIKcUwR6a9f1X4zXT_s"
                 );
                 return admin
                   .database()

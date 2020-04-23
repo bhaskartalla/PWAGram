@@ -8,7 +8,7 @@ if (!window.Promise) {
 
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker
-    .register('/sw.js')
+    .register('/service-worker.js')
     .then(function () {
       console.log('Service worker registered!');
     })
@@ -17,12 +17,12 @@ if ('serviceWorker' in navigator) {
     });
 }
 
-// window.addEventListener('beforeinstallprompt', function(event) {
-//   console.log('beforeinstallprompt fired');
-//   event.preventDefault();
-//   deferredPrompt = event;
-//   return false;
-// });
+window.addEventListener('beforeinstallprompt', function(event) {
+  console.log('beforeinstallprompt fired');
+  event.preventDefault();
+  deferredPrompt = event;
+  return false;
+});
 
 function displayConfirmNotification() {
   if ('serviceWorker' in navigator) {
@@ -63,7 +63,7 @@ function configurePushSub() {
     .then(function(sub) {
       if (sub === null) {
         // Create a new subscription
-        var vapidPublicKey = 'BLQ_Dxie_YZ9c1Eimqt8ZNWCrmCERtpC8qWlGpHRc5ivrvzE-m6msY_Q9VfDsbm1oG3WHpD7DSCtMatsjBMrxz4';
+        var vapidPublicKey = 'BKapuZ3XLgt9UZhuEkodCrtnfBo9Smo-w1YXCIH8YidjHOFAU6XHpEnXefbuYslZY9vtlEnOAmU7Mc-kWh4gfmE';
         var convertedVapidPublicKey = urlBase64ToUint8Array(vapidPublicKey);
         return reg.pushManager.subscribe({
           userVisibleOnly: true,
